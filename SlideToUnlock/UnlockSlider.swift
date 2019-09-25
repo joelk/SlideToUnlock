@@ -18,17 +18,21 @@ import UIKit
 ///
 /// This class knows about internationalization and is fully accessible.
 @IBDesignable public class UnlockSlider: UISlider {
-	
 	@IBInspectable public var title: String = "" {
 		didSet {
 			label.text = title
 			accessibilityLabel = title
 		}
 	}
-	
-	private let rightToLeft: Bool = {
-		return UnlockSlider.userInterfaceLayoutDirection(for: .unspecified) == .rightToLeft
-	}()
+    
+    @IBInspectable public var thumb: UIImage? {
+        get {
+            return thumbImage(for: .normal)
+        }
+        set {
+            setThumbImage(newValue, for: .normal)
+        }
+    }
 	
 	private lazy var shine: CALayer = {
 		let shine = CALayer()
@@ -57,11 +61,14 @@ import UIKit
 		label.textAlignment = .center
 		return label
 	}()
+    
+    private let rightToLeft: Bool = {
+        return UnlockSlider.userInterfaceLayoutDirection(for: .unspecified) == .rightToLeft
+    }()
 	
 	private func setup() {
 		minimumTrackTintColor = .clear
 		maximumTrackTintColor = .clear
-		setThumbImage(UIImage(named: "thumb"), for: .normal)
 		backgroundColor = UIColor(white: 0.1, alpha: 0.25)
 		layer.masksToBounds = true
 		layer.cornerRadius = intrinsicContentSize.height / 2
@@ -76,7 +83,7 @@ import UIKit
 		shine.frame = track
 		if rightToLeft {
 			let thumb = thumbRect(forBounds: bounds, trackRect: track, value: value)
-			label.frame = track.inset(by: UIEdgeInsets(top: 0, left: intrinsicContentSize.height / 3, bottom: 0, right: intrinsicContentSize.height))
+            label.frame = track.inset(by: UIEdgeInsets(top: 0, left: intrinsicContentSize.height / 3, bottom: 0, right: intrinsicContentSize.height))
 			label.layer.contentsRect = CGRect(x: 0, y: 0, width: thumb.minX / (track.width - thumb.width - 10), height: 1)
 		} else {
 			let inset: CGFloat = thumbRect(forBounds: bounds, trackRect: track, value: value).minX - 10
