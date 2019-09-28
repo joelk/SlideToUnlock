@@ -3,12 +3,7 @@
 //  SlideToUnlock
 //
 //  Created by Joel Kin on 9/3/19.
-//  Copyright © 2019 Kin. All rights reserved.
-//
-// 1. Set up the build-in styling options to look like what we want
-// 2. Set up the built-in behavior to do what we want
-// 3. Add the non-built-in UI
-// 4. Accessibility & internationalization
+//  Copyright © 2019 Joel Kin. All rights reserved.
 
 import UIKit
 
@@ -163,5 +158,10 @@ extension UnlockSlider {
 						self.layoutIfNeeded()
 		},
 					   completion: nil)
+	}
+	
+	public override func accessibilityActivate() -> Bool {
+		setValue(1, animated: true)
+		return true
 	}
 }
