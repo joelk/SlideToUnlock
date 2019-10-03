@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  SlideToUnlock
 //
-//  Created by jkraut on 9/3/19.
+//  Created by Joel Kin on 9/3/19.
 //  Copyright © 2019 Kin. All rights reserved.
 //
 
